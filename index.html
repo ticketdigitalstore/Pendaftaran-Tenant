@@ -1,898 +1,550 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>BayRun For Charity - Pendaftaran Tenant</title>
 
-<title>BAYRUN FOR CHARITY 2026</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;800&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <style>
-
 *{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    scroll-behavior:smooth;
-}
-
-:root{
-    --primary:#00eaff;
-    --secondary:#ff8a00;
-    --dark:#050816;
-    --white:#ffffff;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
 }
 
 body{
-    font-family:'Poppins',sans-serif;
-    background:#000;
-    color:white;
-    overflow-x:hidden;
+background:#050505;
+color:white;
+overflow-x:hidden;
 }
 
-/* ========================= */
-/* VIDEO BACKGROUND */
-/* ========================= */
-
-.video-bg{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100%;
-    object-fit:cover;
-    z-index:-3;
-    filter:brightness(.75) contrast(1.1) saturate(1.2);
+body::before{
+content:'';
+position:fixed;
+width:100%;
+height:100%;
+background:
+radial-gradient(circle at top left,#ff005515,transparent 30%),
+radial-gradient(circle at bottom right,#00ffee15,transparent 30%);
+z-index:-1;
 }
 
-.overlay{
-    position:fixed;
-    inset:0;
-    background:
-    linear-gradient(to bottom, rgba(0,0,0,.15), rgba(0,0,0,.35)),
-    radial-gradient(circle at top right, rgba(0,234,255,.10), transparent 45%),
-    radial-gradient(circle at bottom left, rgba(255,138,0,.08), transparent 45%);
-    z-index:-2;
+.page{
+display:none;
+min-height:100vh;
+padding:30px 20px;
+animation:fade .6s ease;
 }
 
-/* ========================= */
-/* PARTICLES */
-/* ========================= */
-
-.particles{
-    position:fixed;
-    inset:0;
-    overflow:hidden;
-    z-index:-1;
+.page.active{
+display:flex;
+justify-content:center;
+align-items:center;
 }
 
-.particles span{
-    position:absolute;
-    width:4px;
-    height:4px;
-    background:white;
-    border-radius:50%;
-    opacity:.4;
-    animation:float 15s linear infinite;
+.container{
+width:100%;
+max-width:900px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.1);
+border-radius:30px;
+padding:35px;
+box-shadow:0 0 50px rgba(255,255,255,0.05);
 }
 
-@keyframes float{
-    0%{
-        transform:translateY(100vh) scale(0);
-    }
-    100%{
-        transform:translateY(-10vh) scale(1.5);
-    }
-}
-
-/* ========================= */
-/* HERO */
-/* ========================= */
-
-.hero{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    padding:20px;
-}
-
-.hero-content{
-    max-width:1000px;
-    animation:fadeUp 1.2s ease;
-}
-
-.logo{
-    font-size:100px;
-    font-family:'Orbitron',sans-serif;
-    font-weight:800;
-    background:linear-gradient(90deg,#ff8a00,#ff004c,#00eaff);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    text-shadow:0 0 30px rgba(0,234,255,.5);
-    animation:glow 3s infinite alternate;
+.title{
+font-size:42px;
+font-weight:800;
+margin-bottom:10px;
+background:linear-gradient(to right,#fff,#ff2f75);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
 .subtitle{
-    margin-top:15px;
-    font-size:28px;
-    letter-spacing:4px;
-    font-weight:600;
-    color:#ffffff;
+color:#ccc;
+margin-bottom:30px;
 }
-
-.hero-desc{
-    margin-top:35px;
-    line-height:2;
-    font-size:18px;
-    color:#f1f1f1;
-}
-
-.hero-badge{
-    margin-top:40px;
-    display:flex;
-    justify-content:center;
-    flex-wrap:wrap;
-    gap:20px;
-}
-
-.badge{
-    padding:15px 30px;
-    border-radius:50px;
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.12);
-    backdrop-filter:blur(15px);
-    font-weight:700;
-    box-shadow:0 0 20px rgba(0,234,255,.15);
-    transition:.4s;
-}
-
-.badge:hover{
-    transform:translateY(-8px);
-    background:linear-gradient(135deg,#00eaff,#0051ff);
-}
-
-/* HERO BUTTON */
-
-.hero-buttons{
-    margin-top:45px;
-    display:flex;
-    justify-content:center;
-    gap:20px;
-    flex-wrap:wrap;
-}
-
-.hero-btn{
-    padding:18px 40px;
-    border-radius:50px;
-    text-decoration:none;
-    font-weight:700;
-    transition:.4s;
-    letter-spacing:1px;
-}
-
-.btn-primary{
-    background:linear-gradient(135deg,#ff8a00,#ff004c);
-    color:white;
-    box-shadow:0 0 25px rgba(255,0,76,.35);
-}
-
-.btn-primary:hover{
-    transform:translateY(-8px) scale(1.05);
-}
-
-.btn-secondary{
-    border:2px solid rgba(255,255,255,.2);
-    background:rgba(255,255,255,.08);
-    backdrop-filter:blur(10px);
-    color:white;
-}
-
-.btn-secondary:hover{
-    background:rgba(255,255,255,.15);
-    transform:translateY(-8px);
-}
-
-/* ========================= */
-/* SECTION */
-/* ========================= */
-
-section{
-    padding:110px 20px;
-}
-
-.section-title{
-    text-align:center;
-    font-size:55px;
-    margin-bottom:60px;
-    font-family:'Orbitron',sans-serif;
-    background:linear-gradient(90deg,#fff,#00eaff);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-}
-
-/* ========================= */
-/* ABOUT */
-/* ========================= */
-
-.about-container{
-    max-width:1000px;
-    margin:auto;
-    background:rgba(255,255,255,.07);
-    border:1px solid rgba(255,255,255,.1);
-    border-radius:35px;
-    backdrop-filter:blur(12px);
-    padding:60px;
-    box-shadow:0 0 40px rgba(0,234,255,.08);
-}
-
-.about-text{
-    line-height:2;
-    font-size:18px;
-    text-align:center;
-    color:#f5f5f5;
-    margin-bottom:25px;
-}
-
-/* ========================= */
-/* COUNTDOWN */
-/* ========================= */
-
-.countdown{
-    display:flex;
-    justify-content:center;
-    gap:30px;
-    flex-wrap:wrap;
-}
-
-.time-box{
-    width:180px;
-    height:180px;
-    border-radius:30px;
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.12);
-    backdrop-filter:blur(15px);
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    transition:.4s;
-    box-shadow:0 0 40px rgba(0,234,255,.12);
-}
-
-.time-box:hover{
-    transform:translateY(-12px);
-}
-
-.time-box h1{
-    font-size:60px;
-    font-family:'Orbitron',sans-serif;
-    color:#00eaff;
-}
-
-.time-box p{
-    margin-top:10px;
-    letter-spacing:2px;
-}
-
-/* ========================= */
-/* INFO */
-/* ========================= */
 
 .info-grid{
-    max-width:1200px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:30px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+margin-top:25px;
 }
 
-.info-card{
-    background:rgba(255,255,255,.08);
-    border-radius:30px;
-    border:1px solid rgba(255,255,255,.1);
-    backdrop-filter:blur(12px);
-    padding:40px;
-    transition:.5s;
+.card{
+background:rgba(255,255,255,0.05);
+border:1px solid rgba(255,255,255,0.08);
+padding:25px;
+border-radius:20px;
+transition:.3s;
 }
 
-.info-card:hover{
-    transform:translateY(-12px);
-    box-shadow:0 0 40px rgba(0,234,255,.2);
+.card:hover{
+transform:translateY(-5px);
+border-color:#ff2f75;
+box-shadow:0 0 25px rgba(255,47,117,.3);
 }
 
-.info-card h2{
-    color:#00eaff;
-    margin-bottom:20px;
-    font-size:30px;
+.card h3{
+margin-bottom:10px;
+font-size:18px;
+color:#ff4f88;
 }
 
-.info-card p{
-    line-height:1.9;
-    color:#eee;
-}
-
-/* ========================= */
-/* BENEFITS */
-/* ========================= */
-
-.benefit-grid{
-    max-width:1300px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-    gap:30px;
-}
-
-.benefit{
-    text-align:center;
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.1);
-    backdrop-filter:blur(12px);
-    border-radius:30px;
-    padding:45px 20px;
-    transition:.5s;
-}
-
-.benefit:hover{
-    transform:translateY(-10px) scale(1.03);
-    background:linear-gradient(135deg,rgba(0,234,255,.15),rgba(255,138,0,.15));
-}
-
-.benefit .icon{
-    font-size:60px;
-    margin-bottom:20px;
-}
-
-.benefit h3{
-    font-size:24px;
-}
-
-/* ========================= */
-/* TICKETS */
-/* ========================= */
-
-.ticket-grid{
-    max-width:1300px;
-    margin:auto;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(270px,1fr));
-    gap:35px;
-}
-
-.ticket{
-    border-radius:35px;
-    overflow:hidden;
-    background:rgba(255,255,255,.08);
-    border:1px solid rgba(255,255,255,.1);
-    backdrop-filter:blur(12px);
-    transition:.5s;
-}
-
-.ticket:hover{
-    transform:translateY(-15px);
-    box-shadow:0 0 50px rgba(0,234,255,.25);
-}
-
-.ticket-header{
-    padding:35px;
-    background:linear-gradient(135deg,#00eaff,#0048ff);
-    text-align:center;
-}
-
-.ticket-header h2{
-    font-size:40px;
-    font-family:'Orbitron',sans-serif;
-}
-
-.ticket-body{
-    padding:40px 30px;
-}
-
-.price{
-    text-align:center;
-    font-size:50px;
-    color:#ff8a00;
-    font-weight:800;
-    margin-bottom:30px;
-}
-
-.ticket ul{
-    list-style:none;
-}
-
-.ticket ul li{
-    padding:14px 0;
-    border-bottom:1px solid rgba(255,255,255,.08);
+.card p{
+font-size:14px;
+color:#ddd;
+line-height:1.7;
 }
 
 .btn{
-    margin-top:35px;
-    display:block;
-    width:100%;
-    text-align:center;
-    padding:18px;
-    border-radius:18px;
-    text-decoration:none;
-    background:linear-gradient(135deg,#ff8a00,#ff004c);
-    color:white;
-    font-weight:700;
-    transition:.4s;
+width:100%;
+padding:18px;
+border:none;
+border-radius:15px;
+font-size:16px;
+font-weight:700;
+cursor:pointer;
+margin-top:25px;
+transition:.3s;
+background:linear-gradient(90deg,#ff0055,#ff4d8d);
+color:white;
 }
 
 .btn:hover{
-    transform:scale(1.04);
-    box-shadow:0 0 30px rgba(255,0,76,.4);
+transform:scale(1.02);
 }
 
-/* ========================= */
-/* FOOTER */
-/* ========================= */
-
-footer{
-    padding:80px 20px;
-    text-align:center;
-    background:rgba(0,0,0,.2);
-    backdrop-filter:blur(8px);
+.btn:disabled{
+background:#444;
+cursor:not-allowed;
+transform:none;
 }
 
-footer h2{
-    font-size:40px;
-    margin-bottom:20px;
-    font-family:'Orbitron',sans-serif;
+.form-group{
+margin-bottom:20px;
 }
 
-footer p{
-    max-width:700px;
-    margin:auto;
-    line-height:1.9;
-    color:#ddd;
+label{
+display:block;
+margin-bottom:8px;
+font-weight:600;
 }
 
-/* ========================= */
-/* ANIMATION */
-/* ========================= */
-
-@keyframes glow{
-    from{
-        filter:drop-shadow(0 0 10px rgba(0,234,255,.4));
-    }
-    to{
-        filter:drop-shadow(0 0 35px rgba(255,138,0,.7));
-    }
+input,textarea,select{
+width:100%;
+padding:15px;
+border:none;
+outline:none;
+border-radius:12px;
+background:#111;
+color:white;
+border:1px solid #333;
 }
 
-@keyframes fadeUp{
-    from{
-        opacity:0;
-        transform:translateY(50px);
-    }
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
+textarea{
+resize:none;
+height:100px;
 }
 
-/* ========================= */
-/* MOBILE */
-/* ========================= */
+.loading-screen{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+background:#000;
+display:none;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+z-index:9999;
+}
+
+.spinner{
+width:90px;
+height:90px;
+border:6px solid rgba(255,255,255,.1);
+border-top:6px solid #ff0055;
+border-radius:50%;
+animation:spin 1s linear infinite;
+margin-bottom:25px;
+}
+
+.loading-screen h2{
+font-size:28px;
+text-align:center;
+padding:0 20px;
+}
+
+.summary{
+background:#111;
+padding:20px;
+border-radius:20px;
+margin-bottom:20px;
+line-height:2;
+}
+
+.qris{
+width:100%;
+max-width:300px;
+display:block;
+margin:25px auto;
+border-radius:20px;
+border:4px solid #fff;
+}
+
+.payment-info{
+background:#111;
+padding:20px;
+border-radius:20px;
+margin-top:20px;
+line-height:2;
+}
+
+.success-box{
+text-align:center;
+padding:50px 20px;
+}
+
+.success-box h1{
+font-size:40px;
+margin-bottom:20px;
+color:#00ff95;
+}
+
+.success-box p{
+color:#ddd;
+line-height:1.8;
+}
+
+.checkbox{
+display:flex;
+align-items:flex-start;
+gap:10px;
+margin-top:20px;
+}
+
+.checkbox input{
+width:auto;
+margin-top:5px;
+}
+
+@keyframes spin{
+100%{
+transform:rotate(360deg);
+}
+}
+
+@keyframes fade{
+from{
+opacity:0;
+transform:translateY(20px);
+}
+to{
+opacity:1;
+transform:translateY(0);
+}
+}
 
 @media(max-width:768px){
-
-.logo{
-    font-size:58px;
+.title{
+font-size:32px;
 }
-
-.subtitle{
-    font-size:18px;
+.container{
+padding:25px;
 }
-
-.section-title{
-    font-size:35px;
 }
-
-.about-container{
-    padding:35px 25px;
-}
-
-.about-text{
-    font-size:16px;
-}
-
-.time-box{
-    width:140px;
-    height:140px;
-}
-
-.time-box h1{
-    font-size:40px;
-}
-
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- VIDEO BACKGROUND -->
-<video autoplay muted loop playsinline class="video-bg">
-    <!-- GANTI video.mp4 DENGAN VIDEO KAMU -->
-    <source src="video.mp4" type="video/mp4">
-</video>
-
-<div class="overlay"></div>
-
-<!-- PARTICLES -->
-<div class="particles">
-<span style="left:5%; animation-delay:0s;"></span>
-<span style="left:15%; animation-delay:2s;"></span>
-<span style="left:25%; animation-delay:4s;"></span>
-<span style="left:35%; animation-delay:1s;"></span>
-<span style="left:45%; animation-delay:5s;"></span>
-<span style="left:55%; animation-delay:2s;"></span>
-<span style="left:65%; animation-delay:6s;"></span>
-<span style="left:75%; animation-delay:3s;"></span>
-<span style="left:85%; animation-delay:7s;"></span>
-<span style="left:95%; animation-delay:1s;"></span>
-</div>
-
-<!-- HERO -->
-<section class="hero">
-
-<div class="hero-content">
-
-<div class="logo">
-BAYRUN
-</div>
-
-<div class="subtitle">
-FOR CHARITY 2026
-</div>
-
-<p class="hero-desc">
-Ultra Premium Cinematic Charity Run Experience 2026.
-Run Beyond Limits. Run For Humanity.
+<!-- PAGE 1 -->
+<section class="page active" id="page1">
+<div class="container">
+<h1 class="title">BAYRUN FOR CHARITY</h1>
+<p class="subtitle">
+Pendaftaran Tenant Resmi Event Charity Run Premium
 </p>
-
-<div class="hero-badge">
-<div class="badge">5K RUN</div>
-<div class="badge">10K RUN</div>
-<div class="badge">GBK JAKARTA</div>
-<div class="badge">8 NOVEMBER 2026</div>
-</div>
-
-<!-- HERO BUTTON -->
-<div class="hero-buttons">
-
-<a href="#tickets" class="hero-btn btn-primary">
-PILIH CATEGORY
-</a>
-
-<a href="#about" class="hero-btn btn-secondary">
-LIHAT EVENT
-</a>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- ABOUT EVENT -->
-<section id="about">
-
-<h1 class="section-title">
-ABOUT THE EVENT
-</h1>
-
-<div class="about-container">
-
-<p class="about-text">
-BAYRUN FOR CHARITY 2026 hadir sebagai event lari charity modern dengan konsep ultra premium, energetic, dan cinematic experience yang dirancang untuk menghadirkan lebih dari sekadar perlombaan lari.
-</p>
-
-<p class="about-text">
-Diselenggarakan di Plaza Parkir Timur GBK Jakarta pada Minggu, 8 November 2026, event ini menggabungkan semangat olahraga, kebersamaan, gaya hidup sehat, dan aksi sosial dalam satu pengalaman yang spektakuler.
-</p>
-
-<p class="about-text">
-Dengan kategori 2K Wheelchair, 2K Family Run, 5K Run, hingga 10K Run, BAYRUN FOR CHARITY 2026 terbuka untuk seluruh kalangan mulai dari keluarga, komunitas lari, atlet pemula, hingga pelari profesional.
-</p>
-
-<p class="about-text">
-Setiap peserta akan mendapatkan berbagai benefit eksklusif seperti race jersey premium, finisher medal, BIB number, chip timing, tote bag, e-certificate, e-racebook, insurance, photo tagging, hingga merchandise spesial seperti sport glasses dan running belt.
-</p>
-
-<p class="about-text">
-Tidak hanya menjadi ajang olahraga, BAYRUN FOR CHARITY 2026 juga membawa misi sosial melalui kegiatan charity yang bertujuan memberikan dampak positif bagi masyarakat.
-</p>
-
-</div>
-
-</section>
-
-<!-- COUNTDOWN -->
-<section>
-
-<h1 class="section-title">
-COUNTDOWN EVENT
-</h1>
-
-<div class="countdown">
-
-<div class="time-box">
-<h1 id="days">00</h1>
-<p>DAYS</p>
-</div>
-
-<div class="time-box">
-<h1 id="hours">00</h1>
-<p>HOURS</p>
-</div>
-
-<div class="time-box">
-<h1 id="minutes">00</h1>
-<p>MINUTES</p>
-</div>
-
-<div class="time-box">
-<h1 id="seconds">00</h1>
-<p>SECONDS</p>
-</div>
-
-</div>
-
-</section>
-
-<!-- EVENT INFO -->
-<section>
-
-<h1 class="section-title">
-EVENT INFORMATION
-</h1>
 
 <div class="info-grid">
 
-<div class="info-card">
-<h2>Location</h2>
+<div class="card">
+<h3>Harga Booth</h3>
 <p>
-Plaza Parkir Timur, GBK Jakarta
+Regular Booth : Rp 500.000<br>
+Premium Booth : Rp 1.000.000
 </p>
 </div>
 
-<div class="info-card">
-<h2>Date</h2>
+<div class="card">
+<h3>Fasilitas Tenant</h3>
 <p>
-Minggu, 8 November 2026
+- Meja & Kursi<br>
+- ID Tenant<br>
+- Akses Listrik<br>
+- Promosi Media Sosial<br>
+- Area Strategis
 </p>
 </div>
 
-<div class="info-card">
-<h2>Categories</h2>
+<div class="card">
+<h3>Target Runner</h3>
 <p>
-2K Wheelchair <br>
-2K Family Run <br>
-5K Run <br>
-10K Run
+Target peserta mencapai 3.000+ runners profesional dan komunitas olahraga dari berbagai kota.
+</p>
+</div>
+
+<div class="card">
+<h3>Jumlah Tenant</h3>
+<p>
+Kuota terbatas hanya untuk 50 Tenant Profesional selama event berlangsung.
 </p>
 </div>
 
 </div>
 
+<button class="btn" onclick="nextPage(2)">
+LANJUT PENDAFTARAN
+</button>
+
+</div>
 </section>
 
-<!-- BENEFITS -->
-<section>
+<!-- PAGE 2 -->
+<section class="page" id="page2">
+<div class="container">
 
-<h1 class="section-title">
-PARTICIPANT BENEFITS
-</h1>
-
-<div class="benefit-grid">
-
-<div class="benefit"><div class="icon">👕</div><h3>Jersey</h3></div>
-<div class="benefit"><div class="icon">🏅</div><h3>Medal</h3></div>
-<div class="benefit"><div class="icon">🎟️</div><h3>BIB</h3></div>
-<div class="benefit"><div class="icon">👜</div><h3>Tote Bag</h3></div>
-<div class="benefit"><div class="icon">❤️</div><h3>Insurance</h3></div>
-<div class="benefit"><div class="icon">📘</div><h3>E-Racebook</h3></div>
-<div class="benefit"><div class="icon">📜</div><h3>E-Certificate</h3></div>
-<div class="benefit"><div class="icon">💻</div><h3>Chip BIB</h3></div>
-<div class="benefit"><div class="icon">🏆</div><h3>Gravir Medal</h3></div>
-<div class="benefit"><div class="icon">📸</div><h3>Photo Tagging</h3></div>
-<div class="benefit"><div class="icon">🕶️</div><h3>Sport Glasses</h3></div>
-<div class="benefit"><div class="icon">🎽</div><h3>Running Belt</h3></div>
-
-</div>
-
-</section>
-
-<!-- TICKETS -->
-<section id="tickets">
-
-<h1 class="section-title">
-TICKET CATEGORY
-</h1>
-
-<div class="ticket-grid">
-
-<!-- TICKET 1 -->
-<div class="ticket">
-
-<div class="ticket-header">
-<h2>2K</h2>
-<p>Wheelchair</p>
-</div>
-
-<div class="ticket-body">
-
-<div class="price">
-INVITATION
-</div>
-
-<ul>
-<li>✔ Invitation Only</li>
-<li>✔ Premium Race Pack</li>
-<li>✔ VIP Access</li>
-<li>✔ E-Certificate</li>
-<li>✔ Insurance</li>
-</ul>
-
-<a href="https://ticketdigitalstore.github.io/FORM-PENDAFTARAN/" class="btn">
-REGISTER NOW
-</a>
-
-</div>
-
-</div>
-
-<!-- TICKET 2 -->
-<div class="ticket">
-
-<div class="ticket-header">
-<h2>2K</h2>
-<p>Family Run</p>
-</div>
-
-<div class="ticket-body">
-
-<div class="price">
-Rp 300K
-</div>
-
-<ul>
-<li>✔ Jersey</li>
-<li>✔ Medal</li>
-<li>✔ Tote Bag</li>
-<li>✔ BIB Number</li>
-<li>✔ Photo Tagging</li>
-</ul>
-
-<a href="https://ticketdigitalstore.github.io/FORM-PENDAFTARAN/" class="btn">
-REGISTER NOW
-</a>
-
-</div>
-
-</div>
-
-<!-- TICKET 3 -->
-<div class="ticket">
-
-<div class="ticket-header">
-<h2>5K</h2>
-<p>Run</p>
-</div>
-
-<div class="ticket-body">
-
-<div class="price">
-Rp 250K
-</div>
-
-<ul>
-<li>✔ Jersey</li>
-<li>✔ Medal</li>
-<li>✔ Chip BIB</li>
-<li>✔ Insurance</li>
-<li>✔ E-Racebook</li>
-</ul>
-
-<a href="https://ticketdigitalstore.github.io/FORM-PENDAFTARAN/" class="btn">
-REGISTER NOW
-</a>
-
-</div>
-
-</div>
-
-<!-- TICKET 4 -->
-<div class="ticket">
-
-<div class="ticket-header">
-<h2>10K</h2>
-<p>Run</p>
-</div>
-
-<div class="ticket-body">
-
-<div class="price">
-Rp 300K
-</div>
-
-<ul>
-<li>✔ Premium Jersey</li>
-<li>✔ Finisher Medal</li>
-<li>✔ Chip Timer</li>
-<li>✔ Sport Glasses</li>
-<li>✔ Running Belt</li>
-</ul>
-
-<a href="https://ticketdigitalstore.github.io/FORM-PENDAFTARAN/" class="btn">
-REGISTER NOW
-</a>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<!-- FOOTER -->
-<footer>
-
-<h2>BAYRUN FOR CHARITY 2026</h2>
-
-<p>
-Run With Passion. Run For Humanity.
-Experience the future of charity running with cinematic atmosphere,
-modern race entertainment, and premium participant experience.
+<h1 class="title">FORMULIR TENANT</h1>
+<p class="subtitle">
+Lengkapi seluruh data dengan benar
 </p>
 
-</footer>
+<div class="form-group">
+<label>Nama Lengkap</label>
+<input type="text" id="nama" required>
+</div>
 
-<!-- JAVASCRIPT -->
+<div class="form-group">
+<label>Nama Brand / UMKM</label>
+<input type="text" id="brand" required>
+</div>
+
+<div class="form-group">
+<label>Email Aktif</label>
+<input type="email" id="email" required>
+</div>
+
+<div class="form-group">
+<label>Nomor WhatsApp</label>
+<input type="number" id="wa" required>
+</div>
+
+<div class="form-group">
+<label>Jenis Booth</label>
+<select id="booth" required>
+<option value="">Pilih Booth</option>
+<option value="Regular Booth - Rp 500.000">Regular Booth - Rp 500.000</option>
+<option value="Premium Booth - Rp 1.000.000">Premium Booth - Rp 1.000.000</option>
+</select>
+</div>
+
+<div class="form-group">
+<label>Produk Yang Dijual</label>
+<textarea id="produk"></textarea>
+</div>
+
+<button class="btn" id="toPayment" disabled>
+LANJUT KE PEMBAYARAN
+</button>
+
+</div>
+</section>
+
+<!-- PAGE 3 -->
+<section class="page" id="page3">
+<div class="container">
+
+<h1 class="title">PEMBAYARAN TENANT</h1>
+
+<div class="summary" id="summaryData"></div>
+
+<img src="qris-bayar.png" class="qris">
+
+<div class="payment-info">
+<h3>Total Pembayaran</h3>
+<p id="totalBayar"></p>
+
+<br>
+
+<h3>Informasi Pembayaran</h3>
+<p>
+1. Scan QRIS di atas<br>
+2. Lakukan pembayaran sesuai nominal<br>
+3. Upload bukti pembayaran<br>
+4. Tunggu verifikasi admin
+</p>
+</div>
+
+<div class="form-group" style="margin-top:20px;">
+<label>Upload Bukti Pembayaran</label>
+<input type="file" id="bukti">
+</div>
+
+<div class="checkbox">
+<input type="checkbox" id="agree">
+<label>
+Saya menyatakan bahwa seluruh data yang diisi adalah benar dan siap mengikuti ketentuan event BayRun For Charity.
+</label>
+</div>
+
+<button class="btn" id="submitBtn" disabled>
+DAFTAR SEKARANG
+</button>
+
+</div>
+</section>
+
+<!-- SUCCESS -->
+<section class="page" id="successPage">
+<div class="container success-box">
+
+<h1>TERIMA KASIH 🎉</h1>
+
+<p>
+Terimakasih telah melakukan pendaftaran tenant.<br><br>
+Pembayaran sedang diproses dan kami akan melakukan konfirmasi melalui E-Mail yang telah didaftarkan.
+</p>
+
+</div>
+</section>
+
+<!-- LOADING -->
+<div class="loading-screen" id="loadingScreen">
+<div class="spinner"></div>
+<h2 id="loadingText">
+Mempersiapkan QRIS Pembayaran...
+</h2>
+</div>
+
 <script>
 
-/* COUNTDOWN */
+const page1 = document.getElementById('page1');
+const page2 = document.getElementById('page2');
+const page3 = document.getElementById('page3');
+const successPage = document.getElementById('successPage');
 
-const targetDate = new Date("November 8, 2026 00:00:00").getTime();
+function nextPage(page){
 
-const countdown = setInterval(() => {
+document.querySelectorAll('.page').forEach(p=>{
+p.classList.remove('active');
+});
 
-const now = new Date().getTime();
-const distance = targetDate - now;
+document.getElementById('page'+page).classList.add('active');
 
-const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-document.getElementById("days").innerHTML = days;
-document.getElementById("hours").innerHTML = hours;
-document.getElementById("minutes").innerHTML = minutes;
-document.getElementById("seconds").innerHTML = seconds;
-
-if(distance < 0){
-clearInterval(countdown);
-document.querySelector(".countdown").innerHTML = "<h1>EVENT STARTED</h1>";
 }
 
-},1000);
+const inputs = document.querySelectorAll('#page2 input,#page2 textarea,#page2 select');
+const toPayment = document.getElementById('toPayment');
 
-/* PARALLAX */
+function validateForm(){
 
-document.addEventListener("mousemove", function(e){
+let valid = true;
 
-const x = e.clientX / window.innerWidth;
-const y = e.clientY / window.innerHeight;
+inputs.forEach(input=>{
+if(input.value.trim()===''){
+valid = false;
+}
+});
 
-document.querySelector(".overlay").style.transform =
-`translate(${x * 5}px, ${y * 5}px)`;
+toPayment.disabled = !valid;
+
+}
+
+inputs.forEach(input=>{
+input.addEventListener('input',validateForm);
+});
+
+toPayment.addEventListener('click',()=>{
+
+document.getElementById('loadingScreen').style.display='flex';
+document.getElementById('loadingText').innerText='Mempersiapkan QRIS Pembayaran...';
+
+setTimeout(()=>{
+
+document.getElementById('loadingScreen').style.display='none';
+
+nextPage(3);
+
+const nama = document.getElementById('nama').value;
+const brand = document.getElementById('brand').value;
+const email = document.getElementById('email').value;
+const wa = document.getElementById('wa').value;
+const booth = document.getElementById('booth').value;
+const produk = document.getElementById('produk').value;
+
+document.getElementById('summaryData').innerHTML=`
+<b>Nama :</b> ${nama}<br>
+<b>Brand :</b> ${brand}<br>
+<b>Email :</b> ${email}<br>
+<b>WhatsApp :</b> ${wa}<br>
+<b>Booth :</b> ${booth}<br>
+<b>Produk :</b> ${produk}
+`;
+
+if(booth.includes('500')){
+document.getElementById('totalBayar').innerText='Rp 500.000';
+}else{
+document.getElementById('totalBayar').innerText='Rp 1.000.000';
+}
+
+},3000);
+
+});
+
+const bukti = document.getElementById('bukti');
+const agree = document.getElementById('agree');
+const submitBtn = document.getElementById('submitBtn');
+
+function validatePayment(){
+
+if(
+bukti.files.length > 0 &&
+agree.checked
+){
+submitBtn.disabled = false;
+}else{
+submitBtn.disabled = true;
+}
+
+}
+
+bukti.addEventListener('change',validatePayment);
+agree.addEventListener('change',validatePayment);
+
+submitBtn.addEventListener('click',()=>{
+
+document.getElementById('loadingScreen').style.display='flex';
+document.getElementById('loadingText').innerText='Pembayaran Sedang Di Verifikasi...';
+
+setTimeout(()=>{
+
+document.getElementById('loadingScreen').style.display='none';
+
+document.querySelectorAll('.page').forEach(p=>{
+p.classList.remove('active');
+});
+
+successPage.classList.add('active');
+
+},15000);
 
 });
 
